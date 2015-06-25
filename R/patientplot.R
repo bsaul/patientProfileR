@@ -37,7 +37,7 @@ plot_patient <- function(baseplot,
                           shape = aes_map$shape, 
                           size  = aes_map$size,
                           fill  = aes_map$fill),
-               na.rm = TRUE) + 
+               na.rm = TRUE)  
     
     # Add up to 5 vertical lines
     # In order to avoid "Warning message: Removed X rows containing missing values"
