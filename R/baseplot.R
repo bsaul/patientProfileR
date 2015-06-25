@@ -98,14 +98,14 @@ scale_baseplot <- function(p,
   ## Warnings ##
   # TODO
   
-  p <- p +
+  out <- p +
     ## Scales ##
     scale_color_manual(values = color.values,  guide = color.guide) +
     scale_size_manual(values  = size.values,   guide = size.guide ) +
     scale_shape_manual(values = shape.values,  guide = shape.guide) +
     scale_fill_manual(values  = fill.values,   guide = fill.guide)
   
-  return(p)
+  return(out)
 }
 
 #-----------------------------------------------------------------------------# 

@@ -1,27 +1,17 @@
-#### Import Data ####
-rt <- '150623'
-lib <- 'J:\\PROTECT\\Operations\\Data checks\\Query Requests\\QU44 Subject Medication Profile Graphics\\'
-outfile <- paste0("QU44_", rt, ".pdf")
-
-
-dt <- read.csv(paste0(lib, 'sample_', rt, '.csv'), header = T, 
-               stringsAsFactors = F, na.strings = ".")
-
-dt <- read.csv(paste0(lib, 'med_history_', rt, '.csv'), header = T, 
-               stringsAsFactors = F, na.strings = ".")
-names(dt) <- tolower(names(dt))
-
-
-save(dt, file = 'data/patientsamples.rdata')
 
 #### TESTING GROUNDS ####
 
-myMap <- aes_map(x = 'xmin', 
-                 xend = 'xmax',
-                 vline1 = 'xwdraw')
+myMap <- aes_map(x = 'start', 
+                 xend = 'stop',
+                 color = 'drug_1',
+                 shape  = 'outcome',
+                 vline1 = 'withdrew',
+                 vline2 = 'current_status',
+                 vline3 = 'major_event')
 
-myBaseplot  <- make_baseplot(dt,
-                         map = myMap,
+
+myBaseplot  <- make_baseplot(patientsamples,
+                         aes_map = myMap,
                          axis.lim.x    = c(-7,(78*7)+15),
                          axis.breaks.x = c(0, 4*7, 12*7, 29*7, 52*7, 78*7),
                          axis.labels.x = c(0, 4, 12, 29, 52, 78),
