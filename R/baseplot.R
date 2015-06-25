@@ -92,7 +92,7 @@ scale_baseplot <- function(p,
      size.guide   = FALSE,
      shape.values = 1:length(levels(p$data$shape)),
      shape.guide  = FALSE,
-     fill.values  = brewer_pal('qual', pal = 2)(length(levels(p$data$color))),
+     fill.values  = rep('white', length(levels(p$data$color))),
      fill.guide   = FALSE)
 { 
   ## Warnings ##
