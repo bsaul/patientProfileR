@@ -28,10 +28,13 @@ get_args <- function(FUN, args_list = NULL, ...){
 #' Create an aesthetic mapping for a Patient Profile
 #' 
 #'
-#' @param 
+#' @param fileBy variable to group files by
+#' @param id the subject id variable
+#' @export
 #-----------------------------------------------------------------------------#
 
-aes_map <- function(id     = 'id',
+aes_map <- function(fileBy = 'id',
+                    id     = 'id',
                     y      = 'y',
                     x      = 'x',
                     xend   = 'xend',
@@ -45,7 +48,8 @@ aes_map <- function(id     = 'id',
                     vline4 = NULL,
                     vline5 = NULL)
 {
-  out <- list(id     = id,
+  out <- list(fileBy = fileBy,
+              id     = id,
               y      = y,
               x      = x,
               xend   = xend,
@@ -66,7 +70,22 @@ aes_map <- function(id     = 'id',
 #' Create an aesthetic mapping for a Vertical Lines
 #' 
 #'
-#' @param 
+#' @param vline1.color defaults to 'black',
+#' @param vline1.size  defaults to 1,
+#' @param vline1.linetype defaults to 'solid',
+#' @param vline2.color defaults to 'darkgrey',
+#' @param vline2.size  defaults to 1,
+#' @param vline2.linetype defaults to 'dashed', 
+#' @param vline3.color defaults to 'lightgrey',
+#' @param vline3.size defaults to 1,
+#' @param vline3.linetype defaults to 'dotted', 
+#' @param vline4.color  defaults to 'blue',
+#' @param vline4.size defaults to 1,
+#' @param vline4.linetype defaults to 'dotdash', 
+#' @param vline5.color defaults to 'red',
+#' @param vline5.size defaults to 1,
+#' @param vline5.linetype defaults to 'twodash'
+#' @export
 #-----------------------------------------------------------------------------#
 
 vline_aes <- function(vline1.color    = 'black',
