@@ -1,0 +1,13 @@
+Package: patientProfileR
+Title: patientProfilerR
+Description: Creates patient profile plots
+Version: 0.1
+Author: Bradley Saul
+Maintainer: Bradley Saul <bradleysaul@gmail.com>
+Depends: R (>= 2.15.1)
+Imports: ggplot2(>= 0.9.3.1),
+  scales(>= 0.2.3)
+Suggests: gridExtra(>= 0.9.1),
+  plyr(>= 1.8)
+License: GPL (>= 2)
+LazyData: true
