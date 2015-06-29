@@ -9,6 +9,8 @@ output: html_document
 
 The package includes a sample dataset `patientsamples`.
 ```{r}
+library(patientProfileR)
+library(plyr)
 head(patientsamples)
 ```
 
@@ -24,7 +26,7 @@ myMap <- aes_map(x = 'start',
 
 ### Define the Baseplot
 
-```{r, echo = TRUE}
+```{r baseplot, echo = TRUE}
 myBaseplot  <- make_baseplot(patientsamples,
                          aes_map = myMap,
                          axis.lim.x    = c(-7,(78*7)+15),
@@ -38,4 +40,17 @@ myBaseplot  <- make_baseplot(patientsamples,
 
 ### Make a Patient Plot
 
+```{r patient_plot, echo = TRUE}
+allPlots <- dlply(patientsamples, 'id', function(x) {
+  plot_patient(myBaseplot, 
+               x,
+               title = x[1, 'id'],
+               aes_map = myMap)
+})
+allPlots[[5]]
+s5 <- subset(patientsamples, id == 'SUBJ5')
+
+plot_patient(myBaseplot, s5, aes_map = myMap)
+
+```
 
