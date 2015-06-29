@@ -5,7 +5,7 @@
 \title{Create an aesthetic mapping for a Patient Profile}
 \usage{
 aes_map(fileBy = "id", id = "id", y = "y", x = "x", xend = "xend",
-  color = "color", size = color, shape = color, fill = color,
+  color = "color", shape = color, size = shape, fill = shape,
   vline1 = NULL, vline2 = NULL, vline3 = NULL, vline4 = NULL,
   vline5 = NULL)
 }
