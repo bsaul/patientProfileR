@@ -34,7 +34,8 @@ plot_patient <- function(baseplot,
     geom_point(data = patient_data, 
                aes_string(x     = aes_map$xend, 
                           y     = aes_map$y, 
-                          shape = aes_map$shape, 
+                          shape = aes_map$shape,
+                          color = aes_map$color,
                           size  = aes_map$size,
                           fill  = aes_map$fill),
                na.rm = TRUE)  
@@ -57,9 +58,9 @@ plot_patient <- function(baseplot,
                                              x     = aes_map[[vl]],
                                              xend  = aes_map[[vl]], 
                                              shape = NULL),
-                                  size     = vlaes['size'],
-                                  color    = vlaes['color'],
-                                  linetype = vlaes['linetype'],
+                                  size     = vlaes[['size']],
+                                  color    = vlaes[['color']],
+                                  linetype = vlaes[['linetype']],
                                   na.rm = TRUE)
       }
     } 

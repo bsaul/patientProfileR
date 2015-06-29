@@ -149,7 +149,3 @@ make_baseplot <- function(data, ...)
   
   return(out)           
 }
-
-  
-
-
