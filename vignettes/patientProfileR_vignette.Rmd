@@ -47,10 +47,8 @@ allPlots <- dlply(patientsamples, 'id', function(x) {
                title = x[1, 'id'],
                aes_map = myMap)
 })
-allPlots[[5]]
-s5 <- subset(patientsamples, id == 'SUBJ5')
+allPlots[[4]]
 
-plot_patient(myBaseplot, s5, aes_map = myMap)
 
 ```
 

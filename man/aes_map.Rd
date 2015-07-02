@@ -5,9 +5,12 @@
 \title{Create an aesthetic mapping for a Patient Profile}
 \usage{
 aes_map(fileBy = "id", id = "id", y = "y", x = "x", xend = "xend",
-  color = "color", shape = color, size = shape, fill = shape,
-  vline1 = NULL, vline2 = NULL, vline3 = NULL, vline4 = NULL,
-  vline5 = NULL)
+  group = "group", color = "color", color.values = NULL,
+  color.guide = FALSE, shape = "shape", shape.values = NULL,
+  shape.guide = FALSE, size = "size", size.values = NULL,
+  size.guide = FALSE, fill = "fill", fill.values = NULL,
+  fill.guide = FALSE, alpha = "alpha", alpha.values = NULL,
+  linetype = "linetype", linetype.values = NULL, label = "label")
 }
 \arguments{
 \item{fileBy}{variable to group files by}

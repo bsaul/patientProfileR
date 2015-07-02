@@ -2,16 +2,34 @@
 % Please edit documentation in R/baseplot.R
 \name{make_baseplot}
 \alias{make_baseplot}
-\title{Make the final baseplot}
+\title{Create the underlying plot upon which to build a patient profile}
 \usage{
-make_baseplot(data, ...)
+make_baseplot(data, aes_map = aes_map(), axis.lim.x = NULL,
+  axis.name.x = "", axis.breaks.x = NULL, axis.labels.x = NULL,
+  axis.name.y = "", axis.breaks.y = NULL, axis.labels.y = NULL)
 }
 \arguments{
-\item{...}{list of additional arguments}
+\item{data}{the dataset}
 
-\item{dt}{data frame}
+\item{aes_map}{a list of the aesthetic mappings for the plot}
+
+\item{axis.lim.x}{vector of length two with lower and upper bounds of x axis}
+
+\item{axis.name.x}{character string of x axis title}
+
+\item{axis.breaks.x}{vector containing locations for x axis labels}
+
+\item{axis.labels.x}{vector (must be same length as axis.breaks.x) with labels
+for the yaxis}
+
+\item{axis.name.y}{character string of y axis title}
+
+\item{axis.breaks.y}{vector containing locations for y axis labels}
+
+\item{axis.labels.y}{vector (must be same length as axis.breaks.y) with labels
+for the y axis}
 }
 \description{
-Make the final baseplot
+Create the underlying plot upon which to build a patient profile
 }
 

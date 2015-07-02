@@ -16,7 +16,7 @@
 #'
 #-----------------------------------------------------------------------------# 
 
-start_baseplot <- function(data,
+make_baseplot <- function(data,
                      aes_map       = aes_map(),
                      axis.lim.x    = NULL,
                      axis.name.x   = '',
@@ -31,14 +31,24 @@ start_baseplot <- function(data,
      max(data[, aes_map$y], na.rm = T) > 1){
     warning('Y values must be between 0 and 1 (inclusive)')
   }
+  
+  colors <- unique(data[, aes_map$color$variable])
+  sizes  <- as.character(with(data, unique(size)[!is.na(unique(size))]))
+  shapes <- as.character(with(data, unique(shape)[!is.na(unique(shape))]))
+  fills  <- unique(data[, aes_map$fill$variable])
+  alphas <- unique(data[, aes_map$alpha$variable])
+  ltypes <- unique(data[, aes_map$linetype$variable])
+  
   # Create a dataset from which to build the plot
   # Need one observation for each unique combination
-  basedt <- expand.grid(x = 0, 
-                        y     = unique(data[, aes_map$y]),
-                        color = unique(data[, aes_map$color]),
-                        size  = unique(data[, aes_map$size]),
-                        shape = unique(data[, aes_map$shape]),
-                        fill  = unique(data[, aes_map$fill]))
+  basedt <- expand.grid(x     = 0, 
+                        y     = 1,
+                        color = colors,
+                        size  = sizes,
+                        shape = shapes,
+                        fill  = fills,
+                        alpha = alphas,
+                        linetype = ltypes)
   
   # Set limits
   if(is.null(axis.lim.x)){
@@ -54,12 +64,54 @@ start_baseplot <- function(data,
     axis.labels.y <- unique(data[, aes_map$y])
   }
   
-  # Base plot 
+  ## Set Scale Defaults ##
+  if(is.null(aes_map$color$values)){
+    color.values <- brewer_pal('qual', pal = 2)(length(levels(basedt$color)))
+  } else {
+    color.values <- aes_map$color$values
+  }
+  
+  if(is.null(aes_map$shape$values)){
+    shape.values <- 1:length(levels(basedt$shape))
+  } else {
+    shape.values <- aes_map$shape$values
+  }
+  
+  if(is.null(aes_map$size$values)){
+    size.values <-  (1:length(levels(basedt$size)))/length(levels(basedt$size))
+  } else {
+    size.values <- aes_map$size$values
+  }
+  
+  if(is.null(aes_map$fill$values)){
+    fill.values <-  rep('white', length(levels(basedt$fill)))
+  } else {
+    fill.values <- aes_map$fill$values
+  }
+  
+  if(is.null(aes_map$alpha$values)){
+    alpha.values <-  rep(.2, length(levels(basedt$alpha)))
+  } else {
+    alpha.values <- aes_map$alpha$values
+  }
+  
+  if(is.null(aes_map$linetype$values)){
+    ltype.values <-  rep('solid', length(levels(basedt$linetype)))
+  } else {
+    ltype.values <- aes_map$linetype$values
+  }
+  
+  
+  #### Make Base plot ####
   p <- ggplot(basedt, aes_string(x = 'x', 
                                  y = 'y', 
                                  color = 'color', 
+                                 size  = 'size',
                                  shape = 'shape',
-                                 size  = 'size')) + 
+                                 fill  = 'fill',
+                                 alpha = 'alpha',
+                                 linetype = 'linetype'
+                                 )) + 
     ## Create a blank plot ##
     geom_blank() +
 
@@ -72,80 +124,18 @@ start_baseplot <- function(data,
                        labels = axis.labels.x) +
     scale_y_continuous(name   = axis.name.y, 
                        breaks = axis.breaks.y, 
-                       labels = axis.labels.y) 
-  
-  ## Done ##
-  return(p)
-}
+                       labels = axis.labels.y) +
 
-#-----------------------------------------------------------------------------# 
-#' Map aesthetic scales for a patient profile
-#' 
-#' @param p a ggplot object
-#' 
-#-----------------------------------------------------------------------------# 
-
-scale_baseplot <- function(p,
-     color.values = brewer_pal('qual', pal = 2)(length(levels(p$data$color))),
-     color.guide  = FALSE,
-     size.values  = (1:length(levels(p$data$size)))/length(levels(p$data$size)),
-     size.guide   = FALSE,
-     shape.values = 1:length(levels(p$data$shape)),
-     shape.guide  = FALSE,
-     fill.values  = rep('white', length(levels(p$data$color))),
-     fill.guide   = FALSE)
-{ 
-  ## Warnings ##
-  # TODO
-  
-  out <- p +
     ## Scales ##
-    scale_color_manual(values = color.values,  guide = color.guide) +
-    scale_size_manual(values  = size.values,   guide = size.guide ) +
-    scale_shape_manual(values = shape.values,  guide = shape.guide) +
-    scale_fill_manual(values  = fill.values,   guide = fill.guide)
-  
-  return(out)
-}
-
-#-----------------------------------------------------------------------------# 
-#' Theme a patient profile
-#' 
-#' Adds a theme to a ggplot object. Not very useful at the moment
-#' 
-#' @param p a ggplot object
-#' 
-#-----------------------------------------------------------------------------# 
-
-theme_baseplot <- function(p){
-  p <- p + 
+    scale_color_manual(values = color.values,  guide = aes_map$color$guide) +
+    scale_size_manual(values  = size.values,   guide = aes_map$size$guide ) + 
+    scale_shape_manual(values = shape.values,  guide = aes_map$shape$guide) +
+    scale_fill_manual(values  = fill.values,   guide = aes_map$fill$guide) +
+    scale_alpha_manual(values = alpha.values,  guide = aes_map$fill$guide) +
+    scale_linetype_manual(values = ltype.values, guide = F) + 
+    
+    ## Theme ##
     theme_classic()
+  
   return(p)
-}
-
-#-----------------------------------------------------------------------------# 
-#' Make the final baseplot
-#' 
-#' @param dt data frame
-#' @param ... list of additional arguments
-#' @export
-#' 
-#-----------------------------------------------------------------------------# 
-
-make_baseplot <- function(data, ...)
-{
-  dots <- list(...)
-  
-  # Start the baseplot
-  base_args <- append(list(data), get_args(start_baseplot, dots))
-  out <- do.call(start_baseplot, args = base_args)
-  
-  # Add scales
-  scale_args <- append(list(p = out), get_args(scale_baseplot, dots))
-  out <- do.call(scale_baseplot, args = scale_args)
-  
-  # Theme the baseplot
-  out <- theme_baseplot(out)
-  
-  return(out)           
 }

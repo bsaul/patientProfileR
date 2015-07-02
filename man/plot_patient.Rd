@@ -5,7 +5,7 @@
 \title{Add a patient's data to a baseplot}
 \usage{
 plot_patient(baseplot, patient_data, title = "", aes_map = aes_map(),
-  vline_map = vline_aes(), segment_size = 2.5)
+  segment_size = 3.5)
 }
 \arguments{
 \item{baseplot}{the plot to add the geoms}
