@@ -24,31 +24,14 @@ make_baseplot <- function(data,
                      axis.labels.x = NULL,
                      axis.name.y   = '',
                      axis.breaks.y = NULL,
-                     axis.labels.y = NULL)
+                     axis.labels.y = NULL
+                     )
 { 
   # Warnings #
   if(min(data[, aes_map$y], na.rm = T) < 0  | 
      max(data[, aes_map$y], na.rm = T) > 1){
     warning('Y values must be between 0 and 1 (inclusive)')
   }
-  
-  colors <- unique(data[, aes_map$color$variable])
-  sizes  <- as.character(with(data, unique(size)[!is.na(unique(size))]))
-  shapes <- as.character(with(data, unique(shape)[!is.na(unique(shape))]))
-  fills  <- unique(data[, aes_map$fill$variable])
-  alphas <- unique(data[, aes_map$alpha$variable])
-  ltypes <- unique(data[, aes_map$linetype$variable])
-  
-  # Create a dataset from which to build the plot
-  # Need one observation for each unique combination
-  basedt <- expand.grid(x     = 0, 
-                        y     = 1,
-                        color = colors,
-                        size  = sizes,
-                        shape = shapes,
-                        fill  = fills,
-                        alpha = alphas,
-                        linetype = ltypes)
   
   # Set limits
   if(is.null(axis.lim.x)){
@@ -66,44 +49,44 @@ make_baseplot <- function(data,
   
   ## Set Scale Defaults ##
   if(is.null(aes_map$color$values)){
-    color.values <- brewer_pal('qual', pal = 2)(length(levels(basedt$color)))
+    color.values <- brewer_pal('qual', pal = 2)(length(levels(data$color)))
   } else {
     color.values <- aes_map$color$values
   }
   
   if(is.null(aes_map$shape$values)){
-    shape.values <- 1:length(levels(basedt$shape))
+    shape.values <- 1:length(levels(data$shape))
   } else {
     shape.values <- aes_map$shape$values
   }
   
   if(is.null(aes_map$size$values)){
-    size.values <-  (1:length(levels(basedt$size)))/length(levels(basedt$size))
+    size.values <-  (1:length(levels(data$size)))/length(levels(data$size))
   } else {
     size.values <- aes_map$size$values
   }
   
   if(is.null(aes_map$fill$values)){
-    fill.values <-  rep('white', length(levels(basedt$fill)))
+    fill.values <-  rep('white', length(levels(data$fill)))
   } else {
     fill.values <- aes_map$fill$values
   }
   
   if(is.null(aes_map$alpha$values)){
-    alpha.values <-  rep(.2, length(levels(basedt$alpha)))
+    alpha.values <-  rep(.2, length(levels(data$alpha)))
   } else {
     alpha.values <- aes_map$alpha$values
   }
   
   if(is.null(aes_map$linetype$values)){
-    ltype.values <-  rep('solid', length(levels(basedt$linetype)))
+    ltype.values <-  rep('solid', length(levels(data$linetype)))
   } else {
     ltype.values <- aes_map$linetype$values
   }
   
   
   #### Make Base plot ####
-  p <- ggplot(basedt, aes_string(x = 'x', 
+  p <- ggplot(data, aes_string(x = 'x', 
                                  y = 'y', 
                                  color = 'color', 
                                  size  = 'size',
