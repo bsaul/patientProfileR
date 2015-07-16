@@ -4,9 +4,8 @@
 #' @param baseplot the plot to add the geoms
 #' @param patient_data an individual patient's data
 #' @param title title of the plot
-#' @param segment_size width of the segments
 #' @param aes_map a list of the aesthetic mappings for the plot
-#' @param vline a list of the aesthetics for vline
+#' @param segment_size width of the segments
 #' @export
 #'
 #-----------------------------------------------------------------------------#
