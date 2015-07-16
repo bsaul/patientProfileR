@@ -12,19 +12,6 @@ geom_datasets <- function(dt){
 }
 
 #-----------------------------------------------------------------------------#
-#' Split dataset into geoms
-#' 
-#'
-#' @param dt dataset to split
-#' @export
-#-----------------------------------------------------------------------------#
-
-geom_datasets <- function(dt){
-  out <- split(dt, f = dt$geom)
-  return(out)
-}
-
-#-----------------------------------------------------------------------------#
 #' Create an aesthetic mapping for a Patient Profile
 #' 
 #'
@@ -42,25 +29,22 @@ aes_map <- function(fileBy = 'id',
                     
                     color  = 'color',
                     color.values = NULL,
-                    color.guide  = FALSE,
                     
                     shape  = 'shape',
                     shape.values = NULL,
-                    shape.guide  = FALSE,
                     
                     size   = 'size',
                     size.values  = NULL,
-                    size.guide   = FALSE,
                     
                     fill   = 'fill',
                     fill.values  = NULL,
-                    fill.guide   = FALSE,
                     
                     alpha  = 'alpha',
                     alpha.values  = NULL,
                     
                     linetype = 'linetype',
                     linetype.values = NULL,
+                    
                     label   = 'label')
 {
   out <- list(fileBy = fileBy,
@@ -70,17 +54,13 @@ aes_map <- function(fileBy = 'id',
               xend   = xend,
               group  = group,
               color  = list(variable = color,
-                            values   = color.values,
-                            guide    = color.guide),
+                            values   = color.values),
               size   = list(variable = size,
-                            values   = size.values,
-                            guide    = size.guide),
+                            values   = size.values),
               shape  = list(variable = shape,
-                            values   = shape.values,
-                            guide    = shape.guide),
+                            values   = shape.values),
               fill   = list(variable = fill,
-                            values   = fill.values,
-                            guide    = fill.guide),
+                            values   = fill.values),
               alpha  = list(variable = alpha,
                             values   = alpha.values),
               linetype = list(variable = linetype,
