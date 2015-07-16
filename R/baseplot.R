@@ -110,15 +110,18 @@ make_baseplot <- function(data,
                        labels = axis.labels.y) +
 
     ## Scales ##
-    scale_color_manual(values = color.values,  guide = aes_map$color$guide) +
-    scale_size_manual(values  = size.values,   guide = aes_map$size$guide ) + 
-    scale_shape_manual(values = shape.values,  guide = aes_map$shape$guide) +
-    scale_fill_manual(values  = fill.values,   guide = aes_map$fill$guide) +
-    scale_alpha_manual(values = alpha.values,  guide = aes_map$fill$guide) +
-    scale_linetype_manual(values = ltype.values, guide = F) + 
+    scale_color_manual(values = color.values) +
+    scale_size_manual(values  = size.values) + 
+    scale_shape_manual(values = shape.values) +
+    scale_fill_manual(values  = fill.values) +
+    scale_alpha_manual(values = alpha.values) +
+    scale_linetype_manual(values = ltype.values) + 
     
     ## Theme ##
-    theme_classic()
+    theme_classic() + 
+    
+    ## Remove legends ##
+    theme(legend_position = 'none')
   
   return(p)
 }
