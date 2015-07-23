@@ -88,7 +88,7 @@ make_baseplot <- function(data,
   aes_dt <- aes_dataset(data, aes_map = aes_map)
   
   #### Make Base plot ####
-  p <- ggplot(unique_dt, aes_string(x = 'x', 
+  p <- ggplot(aes_dt, aes_string(x = 'x', 
                                  y = 'y', 
                                  color = 'color', 
                                  size  = 'size',
