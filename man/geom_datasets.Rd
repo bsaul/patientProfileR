@@ -5,17 +5,11 @@
 \title{Split dataset into geoms}
 \usage{
 geom_datasets(dt)
-
-geom_datasets(dt)
 }
 \arguments{
 \item{dt}{dataset to split}
-
-\item{dt}{dataset to split}
 }
 \description{
-Split dataset into geoms
-
 Split dataset into geoms
 }
 

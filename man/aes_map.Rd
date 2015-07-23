@@ -6,16 +6,25 @@
 \usage{
 aes_map(fileBy = "id", id = "id", y = "y", x = "x", xend = "xend",
   group = "group", color = "color", color.values = NULL,
-  color.guide = FALSE, shape = "shape", shape.values = NULL,
-  shape.guide = FALSE, size = "size", size.values = NULL,
-  size.guide = FALSE, fill = "fill", fill.values = NULL,
-  fill.guide = FALSE, alpha = "alpha", alpha.values = NULL,
-  linetype = "linetype", linetype.values = NULL, label = "label")
+  shape = "shape", shape.values = NULL, size = "size",
+  size.values = NULL, fill = "fill", fill.values = NULL,
+  alpha = "alpha", alpha.values = NULL, linetype = "linetype",
+  linetype.values = NULL, label = "label")
 }
 \arguments{
 \item{fileBy}{variable to group files by}
 
 \item{id}{the subject id variable}
+
+\item{y}{character string naming the y variable}
+
+\item{x}{character string naming the x variable}
+
+\item{xend}{character string naming the xend variable}
+
+\item{color}{character string naming the color variable}
+
+\item{color.values}{vector of color values}
 }
 \description{
 Create an aesthetic mapping for a Patient Profile

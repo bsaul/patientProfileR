@@ -17,8 +17,6 @@ plot_patient(baseplot, patient_data, title = "", aes_map = aes_map(),
 \item{aes_map}{a list of the aesthetic mappings for the plot}
 
 \item{segment_size}{width of the segments}
-
-\item{vline}{a list of the aesthetics for vline}
 }
 \description{
 Add a patient's data to a baseplot

@@ -11,7 +11,7 @@ make_baseplot(data, aes_map = aes_map(), axis.lim.x = NULL,
 \arguments{
 \item{data}{the dataset}
 
-\item{aes_map}{a list of the aesthetic mappings for the plot}
+\item{aes_map}{a list of the aesthetic mappings for the plot. See \code{\link{aes_map}}.}
 
 \item{axis.lim.x}{vector of length two with lower and upper bounds of x axis}
 
@@ -28,6 +28,9 @@ for the yaxis}
 
 \item{axis.labels.y}{vector (must be same length as axis.breaks.y) with labels
 for the y axis}
+}
+\value{
+a ggplot2 object
 }
 \description{
 Create the underlying plot upon which to build a patient profile
