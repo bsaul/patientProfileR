@@ -2,7 +2,7 @@
 #' Create the underlying plot upon which to build a patient profile
 #' 
 #' @param data the dataset
-#' @param aes_map a list of the aesthetic mappings for the plot
+#' @param aes_map a list of the aesthetic mappings for the plot. See \code{\link{aes_map}}.
 #' @param axis.lim.x vector of length two with lower and upper bounds of x axis
 #' @param axis.name.x character string of x axis title
 #' @param axis.breaks.x vector containing locations for x axis labels
@@ -13,6 +13,7 @@
 #' @param axis.labels.y vector (must be same length as axis.breaks.y) with labels 
 #' for the y axis
 #' @export
+#' @return a ggplot2 object
 #'
 #-----------------------------------------------------------------------------# 
 
@@ -84,9 +85,10 @@ make_baseplot <- function(data,
     ltype.values <- aes_map$linetype$values
   }
   
+  aes_dt <- aes_dataset(data, aes_map = aes_map)
   
   #### Make Base plot ####
-  p <- ggplot(data, aes_string(x = 'x', 
+  p <- ggplot(unique_dt, aes_string(x = 'x', 
                                  y = 'y', 
                                  color = 'color', 
                                  size  = 'size',
@@ -110,18 +112,15 @@ make_baseplot <- function(data,
                        labels = axis.labels.y) +
 
     ## Scales ##
-    scale_color_manual(values = color.values) +
-    scale_size_manual(values  = size.values) + 
-    scale_shape_manual(values = shape.values) +
-    scale_fill_manual(values  = fill.values) +
-    scale_alpha_manual(values = alpha.values) +
-    scale_linetype_manual(values = ltype.values) + 
+    scale_color_manual(values = color.values, guide = F) +
+    scale_size_manual(values  = size.values, guide = F) + 
+    scale_shape_manual(values = shape.values, guide = F) +
+    scale_fill_manual(values  = fill.values, guide = F) +
+    scale_alpha_manual(values = alpha.values, guide = F) +
+    scale_linetype_manual(values = ltype.values, guide = F)+ 
     
     ## Theme ##
-    theme_classic() + 
-    
-    ## Remove legends ##
-    theme(legend_position = 'none')
-  
+    theme_classic() 
+
   return(p)
 }
